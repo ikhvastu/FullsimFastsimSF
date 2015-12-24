@@ -1,0 +1,153 @@
+{
+//=========Macro generated from canvas: cRhoAll/cRhoAll
+//=========  (Thu Oct 22 15:41:35 2015) by ROOT version5.34/30
+   TCanvas *cRhoAll = new TCanvas("cRhoAll", "cRhoAll",196,45,700,500);
+   gStyle->SetOptStat(0);
+   cRhoAll->Range(-9.202454,-5.271149,52.14724,29.86984);
+   cRhoAll->SetFillColor(0);
+   cRhoAll->SetBorderMode(0);
+   cRhoAll->SetBorderSize(2);
+   cRhoAll->SetTickx(1);
+   cRhoAll->SetTicky(1);
+   cRhoAll->SetLeftMargin(0.15);
+   cRhoAll->SetRightMargin(0.035);
+   cRhoAll->SetBottomMargin(0.15);
+   cRhoAll->SetFrameBorderMode(0);
+   cRhoAll->SetFrameBorderMode(0);
+   
+   TH1D *h_RhoAll_2 = new TH1D("h_RhoAll_2","h_RhoAll Fullsim",25,0,50);
+   h_RhoAll_2->SetBinContent(1,0.2689552);
+   h_RhoAll_2->SetBinContent(2,0.419953);
+   h_RhoAll_2->SetBinContent(3,0.5688415);
+   h_RhoAll_2->SetBinContent(4,0.7094418);
+   h_RhoAll_2->SetBinContent(5,0.8513478);
+   h_RhoAll_2->SetBinContent(6,0.9879556);
+   h_RhoAll_2->SetBinContent(7,1.142638);
+   h_RhoAll_2->SetBinContent(8,1.314916);
+   h_RhoAll_2->SetBinContent(9,1.516845);
+   h_RhoAll_2->SetBinContent(10,1.743337);
+   h_RhoAll_2->SetBinContent(11,2.006775);
+   h_RhoAll_2->SetBinContent(12,2.306449);
+   h_RhoAll_2->SetBinContent(13,2.663687);
+   h_RhoAll_2->SetBinContent(14,3.016455);
+   h_RhoAll_2->SetBinContent(15,3.446208);
+   h_RhoAll_2->SetBinContent(16,3.834004);
+   h_RhoAll_2->SetBinContent(17,4.482604);
+   h_RhoAll_2->SetBinContent(18,4.645078);
+   h_RhoAll_2->SetBinContent(19,4.870588);
+   h_RhoAll_2->SetBinContent(20,5.578947);
+   h_RhoAll_2->SetBinContent(21,6.92);
+   h_RhoAll_2->SetBinContent(22,5.2);
+   h_RhoAll_2->SetBinContent(23,3.777778);
+   h_RhoAll_2->SetBinContent(24,14.5);
+   h_RhoAll_2->SetBinContent(25,3.666667);
+   h_RhoAll_2->SetBinContent(26,8);
+   h_RhoAll_2->SetBinError(1,0.003616051);
+   h_RhoAll_2->SetBinError(2,0.001593932);
+   h_RhoAll_2->SetBinError(3,0.001207448);
+   h_RhoAll_2->SetBinError(4,0.001142395);
+   h_RhoAll_2->SetBinError(5,0.001233382);
+   h_RhoAll_2->SetBinError(6,0.001435972);
+   h_RhoAll_2->SetBinError(7,0.001804917);
+   h_RhoAll_2->SetBinError(8,0.002405165);
+   h_RhoAll_2->SetBinError(9,0.00338181);
+   h_RhoAll_2->SetBinError(10,0.004964695);
+   h_RhoAll_2->SetBinError(11,0.007588003);
+   h_RhoAll_2->SetBinError(12,0.01199348);
+   h_RhoAll_2->SetBinError(13,0.0196454);
+   h_RhoAll_2->SetBinError(14,0.03222343);
+   h_RhoAll_2->SetBinError(15,0.05479651);
+   h_RhoAll_2->SetBinError(16,0.09106281);
+   h_RhoAll_2->SetBinError(17,0.1660809);
+   h_RhoAll_2->SetBinError(18,0.260638);
+   h_RhoAll_2->SetBinError(19,0.4101163);
+   h_RhoAll_2->SetBinError(20,0.6949404);
+   h_RhoAll_2->SetBinError(21,1.480627);
+   h_RhoAll_2->SetBinError(22,1.46606);
+   h_RhoAll_2->SetBinError(23,1.416152);
+   h_RhoAll_2->SetBinError(24,10.60071);
+   h_RhoAll_2->SetBinError(25,2.388243);
+   h_RhoAll_2->SetBinError(26,8.485281);
+   h_RhoAll_2->SetEntries(51.6874);
+   h_RhoAll_2->SetStats(0);
+   
+   TF1 *PrevFitTMP = new TF1("PrevFitTMP","pol1",0,50);
+   PrevFitTMP->SetFillColor(19);
+   PrevFitTMP->SetFillStyle(0);
+
+   Int_t ci;      // for color index setting
+   TColor *color; // for color definition with alpha
+   ci = TColor::GetColor("#000099");
+   PrevFitTMP->SetMarkerColor(ci);
+   PrevFitTMP->SetMarkerStyle(20);
+
+   ci = TColor::GetColor("#ff0000");
+   PrevFitTMP->SetLineColor(ci);
+   PrevFitTMP->SetLineWidth(2);
+   PrevFitTMP->SetChisquare(5600.252);
+   PrevFitTMP->SetNDF(23);
+   PrevFitTMP->GetXaxis()->SetNdivisions(505);
+   PrevFitTMP->GetXaxis()->SetLabelFont(42);
+   PrevFitTMP->GetXaxis()->SetLabelOffset(0.001);
+   PrevFitTMP->GetXaxis()->SetLabelSize(0.05);
+   PrevFitTMP->GetXaxis()->SetTitleSize(0.06);
+   PrevFitTMP->GetXaxis()->SetTitleOffset(0.9);
+   PrevFitTMP->GetXaxis()->SetTitleFont(42);
+   PrevFitTMP->GetYaxis()->SetNdivisions(505);
+   PrevFitTMP->GetYaxis()->SetLabelFont(42);
+   PrevFitTMP->GetYaxis()->SetLabelSize(0.05);
+   PrevFitTMP->GetYaxis()->SetTitleSize(0.06);
+   PrevFitTMP->GetYaxis()->SetTitleOffset(1.2);
+   PrevFitTMP->GetYaxis()->SetTitleFont(42);
+   PrevFitTMP->SetParameter(0,0.1661129);
+   PrevFitTMP->SetParError(0,0.001199523);
+   PrevFitTMP->SetParLimits(0,0,0);
+   PrevFitTMP->SetParameter(1,0.0775891);
+   PrevFitTMP->SetParError(1,0.0001300061);
+   PrevFitTMP->SetParLimits(1,0,0);
+   h_RhoAll_2->GetListOfFunctions()->Add(PrevFitTMP);
+
+   ci = TColor::GetColor("#0000ff");
+   h_RhoAll_2->SetFillColor(ci);
+   h_RhoAll_2->SetFillStyle(3000);
+
+   ci = TColor::GetColor("#0000ff");
+   h_RhoAll_2->SetLineColor(ci);
+
+   ci = TColor::GetColor("#0000ff");
+   h_RhoAll_2->SetMarkerColor(ci);
+   h_RhoAll_2->SetMarkerStyle(20);
+   h_RhoAll_2->GetXaxis()->SetTitle("h_RhoAll");
+   h_RhoAll_2->GetXaxis()->SetNdivisions(505);
+   h_RhoAll_2->GetXaxis()->SetLabelFont(42);
+   h_RhoAll_2->GetXaxis()->SetLabelOffset(0.001);
+   h_RhoAll_2->GetXaxis()->SetLabelSize(0.05);
+   h_RhoAll_2->GetXaxis()->SetTitleSize(0.06);
+   h_RhoAll_2->GetXaxis()->SetTitleOffset(0.9);
+   h_RhoAll_2->GetXaxis()->SetTitleFont(42);
+   h_RhoAll_2->GetYaxis()->SetTitle(" events");
+   h_RhoAll_2->GetYaxis()->SetRange(1,1);
+   h_RhoAll_2->GetYaxis()->SetNdivisions(505);
+   h_RhoAll_2->GetYaxis()->SetLabelFont(42);
+   h_RhoAll_2->GetYaxis()->SetLabelSize(0.05);
+   h_RhoAll_2->GetYaxis()->SetTitleSize(0.06);
+   h_RhoAll_2->GetYaxis()->SetTitleOffset(1.2);
+   h_RhoAll_2->GetYaxis()->SetTitleFont(42);
+   h_RhoAll_2->GetZaxis()->SetLabelFont(42);
+   h_RhoAll_2->GetZaxis()->SetLabelSize(0.05);
+   h_RhoAll_2->GetZaxis()->SetTitleSize(0.035);
+   h_RhoAll_2->GetZaxis()->SetTitleFont(42);
+   h_RhoAll_2->Draw("");
+   
+   TPaveText *pt = new TPaveText(0.2672989,0.907,0.7327011,0.995,"blNDC");
+   pt->SetName("title");
+   pt->SetBorderSize(0);
+   pt->SetFillColor(0);
+   pt->SetFillStyle(0);
+   pt->SetTextFont(42);
+   TText *text = pt->AddText("h_RhoAll Fullsim");
+   pt->Draw();
+   cRhoAll->Modified();
+   cRhoAll->cd();
+   cRhoAll->SetSelected(cRhoAll);
+}

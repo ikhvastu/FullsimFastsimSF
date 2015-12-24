@@ -1,0 +1,163 @@
+ gSystem->Exec("rm tableEl.tex"); // delete previous tex file
+    ofstream myfile;
+    myfile.open ("tableEl.tex", ios_base::app); // create a new tex file
+    myfile << fixed << showpoint << setprecision(1);
+    myfile << "\\" <<"documentclass[11pt,twoside,a4paper,pdftex]{report}"<<endl;
+    myfile << "\\" <<"usepackage[pdftex]{graphicx}"<<endl;
+    myfile << "\\" <<"textheight 21.cm"<<endl;
+    myfile << "\\" <<"textwidth 18.0cm"<<endl;
+    myfile << "\\" <<"oddsidemargin  0.cm"<<endl;
+    myfile << "\\" <<"evensidemargin 0.cm"<<endl;
+    myfile << "\\" <<"marginparwidth 0.cm"<<endl;
+    myfile << "\\" <<"marginparsep 0. cm"<<endl;
+    myfile << "\\" <<"topmargin 0.cm"<<endl;
+    myfile << "\\" <<"headheight 0.cm"<<endl; 
+    myfile << "\\" <<"topskip 0.cm"<<endl;
+    myfile << "\\" <<"headsep 0.cm"<<endl;
+    myfile << "\\" <<"begin{document}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+    myfile << fixed << showpoint << setprecision(1);
+
+    //creation of the table in the file
+    myfile << "\\" <<"begin{table}"<<endl;
+    myfile << "\\" <<"begin{center}"<<endl;
+    myfile << "\\" <<"caption{\\label{tab:multilep} 2D map in $p_{T}$ and $\\eta$}"<<endl;
+    myfile << "\\" <<"begin{tabular}{|c|c|c|c|}"<<endl;
+    myfile << "\\hline"<<endl;
+
+    for(int i = 1; i < numberBinseta + 1; i++)
+        myfile << "&" << " $ \\eta \\subset [$" << etab6el[i-1] << "," << etab6el[i] << "]"; 
+    myfile << "\\\\ \\hline" << endl;
+    
+    //Filing the raws of the table
+    myfile << fixed << showpoint << setprecision(2);
+    for(int i = 1; i < numberBinspt2D ; i++){
+        myfile << " $p_{T} \\subset [$"  << int(ptb2D[i-1]) << "," << int(ptb2D[i]) << "]" ;
+        for(int j = 1; j < numberBinseta + 1; j++){
+            //printf("%.2f +- %.2f ", h_ele_ptetac[1]->GetBinContent(i,j), h_ele_ptetac[1]->GetBinError(i,j));
+            myfile << "&" << h_ele_ptetac[1]->GetBinContent(i,j) << "$\\pm$" << h_ele_ptetac[1]->GetBinError(i,j) ;
+        }
+        myfile << "\\\\ \\hline" << endl;
+        //printf("\n");
+    }
+
+    myfile << "\\" <<"end{tabular}"<<endl;
+    myfile << "\\" <<"end{center}"<<endl;
+    myfile << "\\" <<"end{table}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+
+    myfile << "\\" <<"end{document}"<<endl;
+
+//___________________________________________________________________________________________________________
+
+    myfile.close();
+    gSystem->Exec("rm tableMu.tex"); // delete previous tex file
+    myfile.open ("tableMu.tex", ios_base::app); // create a new tex file
+    myfile << fixed << showpoint << setprecision(1);
+    myfile << "\\" <<"documentclass[11pt,twoside,a4paper,pdftex]{report}"<<endl;
+    myfile << "\\" <<"usepackage[pdftex]{graphicx}"<<endl;
+    myfile << "\\" <<"textheight 21.cm"<<endl;
+    myfile << "\\" <<"textwidth 18.0cm"<<endl;
+    myfile << "\\" <<"oddsidemargin  0.cm"<<endl;
+    myfile << "\\" <<"evensidemargin 0.cm"<<endl;
+    myfile << "\\" <<"marginparwidth 0.cm"<<endl;
+    myfile << "\\" <<"marginparsep 0. cm"<<endl;
+    myfile << "\\" <<"topmargin 0.cm"<<endl;
+    myfile << "\\" <<"headheight 0.cm"<<endl; 
+    myfile << "\\" <<"topskip 0.cm"<<endl;
+    myfile << "\\" <<"headsep 0.cm"<<endl;
+    myfile << "\\" <<"begin{document}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+    myfile << fixed << showpoint << setprecision(1);
+
+    //creation of the table in the file
+    myfile << "\\" <<"begin{table}"<<endl;
+    myfile << "\\" <<"begin{center}"<<endl;
+    myfile << "\\" <<"caption{\\label{tab:multilep} 2D map in $p_{T}$ and $\\eta$}"<<endl;
+    myfile << "\\" <<"begin{tabular}{|c|c|c|c|}"<<endl;
+    myfile << "\\hline"<<endl;
+
+    for(int i = 1; i < numberBinseta + 1; i++)
+        myfile << "&" << " $ \\eta \\subset [$" << etab6[i-1] << "," << etab6[i] << "]"; 
+    myfile << "\\\\ \\hline" << endl;
+    
+    //Filing the raws of the table
+    myfile << fixed << showpoint << setprecision(2);
+    for(int i = 1; i < numberBinspt ; i++){
+        myfile << " $p_{T} \\subset [$"  << int(ptb23[i-1]) << "," << int(ptb23[i]) << "]" ;
+        for(int j = 1; j < numberBinseta + 1; j++){
+            //printf("%.2f +- %.2f ", h_ele_ptetac[1]->GetBinContent(i,j), h_ele_ptetac[1]->GetBinError(i,j));
+            myfile << "&" << h_mu_ptetac[1]->GetBinContent(i,j) << "$\\pm$" << h_mu_ptetac[1]->GetBinError(i,j) ;
+        }
+        myfile << "\\\\ \\hline" << endl;
+        //printf("\n");
+    }
+
+    myfile << "\\" <<"end{tabular}"<<endl;
+    myfile << "\\" <<"end{center}"<<endl;
+    myfile << "\\" <<"end{table}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+
+    myfile << "\\" <<"end{document}"<<endl;
+
+    myfile.close();
+
+//___________________________________________________________________________________________________________
+
+    myfile.close();
+    gSystem->Exec("rm tableTau.tex"); // delete previous tex file
+    myfile.open ("tableTau.tex", ios_base::app); // create a new tex file
+    myfile << fixed << showpoint << setprecision(1);
+    myfile << "\\" <<"documentclass[11pt,twoside,a4paper,pdftex]{report}"<<endl;
+    myfile << "\\" <<"usepackage[pdftex]{graphicx}"<<endl;
+    myfile << "\\" <<"textheight 21.cm"<<endl;
+    myfile << "\\" <<"textwidth 18.0cm"<<endl;
+    myfile << "\\" <<"oddsidemargin  0.cm"<<endl;
+    myfile << "\\" <<"evensidemargin 0.cm"<<endl;
+    myfile << "\\" <<"marginparwidth 0.cm"<<endl;
+    myfile << "\\" <<"marginparsep 0. cm"<<endl;
+    myfile << "\\" <<"topmargin 0.cm"<<endl;
+    myfile << "\\" <<"headheight 0.cm"<<endl; 
+    myfile << "\\" <<"topskip 0.cm"<<endl;
+    myfile << "\\" <<"headsep 0.cm"<<endl;
+    myfile << "\\" <<"begin{document}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+    myfile << fixed << showpoint << setprecision(1);
+
+    //creation of the table in the file
+    myfile << "\\" <<"begin{table}"<<endl;
+    myfile << "\\" <<"begin{center}"<<endl;
+    myfile << "\\" <<"caption{\\label{tab:multilep} 2D map in $p_{T}$ and $\\eta$}"<<endl;
+    myfile << "\\" <<"begin{tabular}{|c|c|c|c|}"<<endl;
+    myfile << "\\hline"<<endl;
+
+    for(int i = 1; i < numberBinseta + 1; i++)
+        myfile << "&" << " $ \\eta \\subset [$" << etab6[i-1] << "," << etab6[i] << "]"; 
+    myfile << "\\\\ \\hline" << endl;
+    
+    //Filing the raws of the table
+    myfile << fixed << showpoint << setprecision(2);
+    for(int i = 1; i < numberBinspt ; i++){
+        myfile << " $p_{T} \\subset [$"  << int(ptb23[i-1]) << "," << int(ptb23[i]) << "]" ;
+        for(int j = 1; j < numberBinseta + 1; j++){
+            //printf("%.2f +- %.2f ", h_ele_ptetac[1]->GetBinContent(i,j), h_ele_ptetac[1]->GetBinError(i,j));
+            myfile << "&" << h_tau_ptetac[1]->GetBinContent(i,j) << "$\\pm$" << h_tau_ptetac[1]->GetBinError(i,j) ;
+        }
+        myfile << "\\\\ \\hline" << endl;
+        //printf("\n");
+    }
+
+    myfile << "\\" <<"end{tabular}"<<endl;
+    myfile << "\\" <<"end{center}"<<endl;
+    myfile << "\\" <<"end{table}"<<endl;
+    myfile << " "<<endl;
+    myfile << " "<<endl;
+
+    myfile << "\\" <<"end{document}"<<endl;
+
+    myfile.close();

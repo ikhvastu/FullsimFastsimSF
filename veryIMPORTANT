@@ -1,0 +1,183 @@
+---+!! SUSY Fullsim/Fastsim Lepton Scale Factors
+%TOC{title="Contents:"}%
+
+FastSim and FullSim efficiencies are considerably different because of all kinds of effects (modeling of showers, PileUp modeling...).
+
+So data-MC efficiency scale factors should be calculated wrt FastSim simulation to apply to FastSim samples (e.g. SUSY signal models).  
+
+In case the group already calculated data-FullSim scale factors, for example to use for their background estimates, or uses the POG recommended selection and scale factors, then those scale factors should be corrected for the difference between FastSim and FullSim.  This procedure is followed here.  For the main SUSY selections, the data-FullSim scale factors have been calculated and we just add an extra scale factor to correct between FastSim and FullSim.  The Scale Factors are defined as: Fullsim_eff / FastSim_eff. Mostly SF depends on three variables: pT, eta and PU. 2D and 3D SF parametrized in pT, eta and pT, eta and PU are provided.
+
+---+ Muon ID/iso WPs
+
+%TWISTY{mode="div" showlink="Muon ID/iso WPs&nbsp;" hidelink="Hide&nbsp;"  firststart="hide"
+showimgright="%ICONURLPATH{toggleopen-small}%" 
+hideimgright="%ICONURLPATH{toggleclose-small}%"}%
+
+   * ID:  Loose and Medium  from [[https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideMuonIdRun2][SWGuideMuonID205]]
+   * Iso:  !MiniIsolation (WP: 0.4, 0.2)
+      * Spring15 25ns EA for R=0.3 (values are divided by (0.3/R)^2), rho = fixedGridRhoFastjetCentralNeutral
+         * 0 &le; abs(eta) &lt; 0.8 : 0.0735 
+         * 0.8 &le; abs(eta) &lt; 1.3 : 0.0619 
+         * 1.3 &le; abs(eta) &lt; 2.0 :  0.0465 
+         * 2.0 &le; abs(eta) &lt; 2.2 : 0.0433 
+         * 2.2 &le; abs(eta) &le; 2.5 : 0.0577 
+   * !MultiIso with !LepAware JEC approach, [[https://www.dropbox.com/s/fsfw0gummwsc61v/lepawareJECv2_bkg_wp_300915.pdf?dl=0][WPs in slide 7]]
+      * Medium
+   * IP:  dxy, dz, !SIP3D
+      * tight !IP2D: dxy < 0.05 cm, dz < 0.1 cm
+      * tight !IP3D:  !SIP3D<4
+
+%ENDTWISTY%
+
+---+ Electron ID/iso WPs
+
+%TWISTY{mode="div" showlink="Electron ID/iso WPs&nbsp;" hidelink="Hide&nbsp;"  firststart="hide"
+showimgright="%ICONURLPATH{toggleopen-small}%" 
+hideimgright="%ICONURLPATH{toggleclose-small}%"}%
+
+   * Cut-based ID: Veto/Loose/Medium/Tight without the cut on relIso. 
+   * MVA ID (non-triggering)
+      * Spring15 25ns non-triggering MVA
+         * Tight WP from ra5 people [[https://indico.cern.ch/event/444211/contribution/1/attachments/1152043/1654543/selection-update-25ns.pdf][here]]
+            * Cuts for pT > 10 GeV are MVA > 0.87, 0.60, 0.17 for |eta| [0, 0.8], [0.8, 1.479], [1.479, 2.5] 
+         * VLoose WP [[https://twiki.cern.ch/twiki/pub/CMS/SUSLeptonSF/ElectronMVAWorkingPoints_09042015.pdf][here]] for veto selection (from Si)
+            * Cuts for pT > 10 GeV are (notice the negative sign) MVA > -0.16, -0.65, -0.74 for |eta| [0, 0.8], [0.8, 1.479], [1.479, 2.5] 
+         * !VLooseFO WPs for fakeable objects (from ra5)
+            * !VLooseFOIDEmu: mva &gt; -0.70/-0.83/-0.92 for |eta| &lt;0.8 / 0.8&lt;|eta|&lt;1.479 / 1.479&lt;|eta|&lt;2.5 
+            * !VLooseFOIDISOEmu: mva &gt; -0.155/-0.56/-0.76 for |eta| &lt;0.8 / 0.8&lt;|eta|&lt;1.479 / 1.479&lt;|eta|&lt;2.5 
+   * Iso:  !MiniIsolation (WP: 0.4, 0.1)
+   * !MultiIso with !LepAware JEC approach, [[https://www.dropbox.com/s/fsfw0gummwsc61v/lepawareJECv2_bkg_wp_300915.pdf?dl=0][WPs in slide 7]]
+      * Tight
+      * Spring15 25ns EA for R=0.3 (values are divided by (0.3/R)^2), rho = fixedGridRhoFastjetCentralNeutral
+         * 0 &le; abs(eta) &lt; 1 : 0.1752
+         * 1 &le; abs(eta) &lt; 1.479 : 0.1862 
+         * 1.479 &le; abs(eta) &lt; 2.0 :  0.1411 
+         * 2.0 &le; abs(eta) &lt; 2.2 : 0.1534 
+         * 2.2 &le; abs(eta) &le; 2.3 : 0.1903 
+         * 2.3 &le; abs(eta) &le; 2.4 : 0.2243 
+         * 2.4 &le; abs(eta) &le; 2.5 : 0.2687 
+   * IP:  dxy, dz, !SIP3D if using MVA ID
+      * loose !IP2D: dxy < 0.2 cm, dz < 0.5 cm
+      * tight !IP2D: dxy < 0.05 cm, dz < 0.1 cm
+      * tight !IP3D:  !SIP3D<4
+   * Trigger Emulation: In order to reduce the trigger inefficiency with respect to the chosen offline selection (and therefore reduce the impact of trigger SF and their uncertainties), analyzers might want to apply "offline trigger emulation cuts" on top of the ID+IP+ISO selection
+      * for Tight MVA WP + Tight !MultiIso WP offline selection ra5 people have choosen the following cuts to use with double non-isolated electron triggers (ID Emulation), double isolated electron triggers (ID+ISO Emulation)
+         * ID Emulation EB: sIEtaIEta&lt;0.011, H/E&lt;0.08, |dEtaIn|&lt;0.01, |dPhiIn|&lt;0.04, |1/E - 1/P|&lt;0.01
+         * ID Emulation EE: sIEtaIEta&lt;0.031, H/E&lt;0.08, |dEtaIn|&lt;0.01, |dPhiIn|&lt;0.08, |1/E - 1/P|&lt;0.01
+         * ISO Emulation: !EcalPFClusterIso /pt&lt;0.45, !HcalPFClusterIso /pt&lt;0.25, !TrackIso /pt&lt;0.2
+
+%ENDTWISTY%
+
+---+ List of ID/ISO combinations:
+
+%TWISTY{mode="div" showlink="List of ID/ISO combinations:&nbsp;" hidelink="Hide&nbsp;"  firststart="hide"
+showimgright="%ICONURLPATH{toggleopen-small}%" 
+hideimgright="%ICONURLPATH{toggleclose-small}%"}%
+
+---++Muons with pT > 10 GeV: 
+
+   * Loose ID
+   * Medium ID 
+   * MiniIso02(on top of Loose ID)  
+   * MiniIso04(on top of Loose ID) 
+   * MultiIsoMedium(on top of Medium ID)
+   * TightIP2D(on top of Loose ID)
+   * TightIP3D(on top of Loose ID)
+
+---++ Electrons with pT > 10 GeV:
+
+   * Veto, Loose, Medium, Tight CB ID 
+   * (MVA VLoose + TightIP2D), (MVA VLooseFO+IDEMu + TightIP2D), (MVA Tight + TightIP2D + TightIP3D),  (MVA Tight+IDEmu + TightIP2D + TightIP3D)
+   * MiniIso01(on top of Non triggering MVA VLoose + TightIP2D)
+   * MiniIso04(on top of Non triggering MVA VLoose + TightIP2D)
+   * MultiIsoTight+ISOEmu(on top of Non triggering MVA Tight+IDEmu + TightIP2D + TightIP3D)
+   * MultiIsoTight(on top of Non triggering MVA Tight+IDEmu + TightIP2D + TightIP3D)
+   * ConversionVeto && InnerHits <=1(on top of MVA VLoose + TightIP2D)
+   * ConversionVeto && InnerHits ==0 && 3Charge(on top of MVA Tight + TightIP2D + TightIP3D)
+
+%ENDTWISTY%
+
+---+ Summary
+
+Tables display how different ID/ISO SF changes vs kinematical variables, hadron activity, pile-up and activity around lepton. For example for Medium Loose ID the value is 1-8%, it means that SF varies from 1%(for high pt) to 8%(for low pt), click on it to see Fullsim and Fastsim efficiencies and SF vs pT. Dash line means no dependence - it doesn't mean that SF is 0, just that this SF doesn't depend on arbitrary variable. Also 2D [pt eta] SF and 2D [pt eta] in each PU bin are shown. The last column contains root file with 2D [pt eta] and 3D[pt eta PU] SF. See the recommendations how to implement SF below. 
+
+If the user has in the analysis(for example) Non-triggering MVA Tight electron + Tight IP2D + Tight IP3D +  MultiIso Tight + ConversionVeto + InnerHits = 0 + 3Charge the one should implement SF(MVA Tight electron + Tight IP2D + Tight IP3D) * SF(MultiIso Tight) * SF(ConversionVeto + InnerHits = 0 + 3Charge) for each lepton.
+
+
+---++Muons: 
+
+|                  | pT      | eta    | HT    |  Njets | PU      | Activity | 2D [pT eta] | 2D [pt eta PU(0-9)] | 2D [pt eta PU(10-13)] | 2D [pt eta PU(14-17)] | 2D [pt eta PU(18-40)] | root |
+|Loose ID    | [[%ATTACHURL%/pt_mu_looseID.pdf][1-8%]] |  [[%ATTACHURL%/eta_mu_looseID.pdf][2-4%]] | [[%ATTACHURL%/HT_mu_looseID.pdf][2-8%]] | [[%ATTACHURL%/njets_mu_looseID.pdf][2-8%]] | [[%ATTACHURL%/npv_mu_looseID.pdf][1-10%]] |- | [[%ATTACHURL%/sf_mu_looseID_1.pdf][1-11%]]| [[%ATTACHURL%/sf_mu_looseID_npv_1_9.pdf][0-9%]] | [[%ATTACHURL%/sf_mu_looseID_npv_10_13.pdf][1-10%]] | [[%ATTACHURL%/sf_mu_looseID_npv_14_17.pdf][1-12%]] | [[%ATTACHURL%/sf_mu_looseID_npv_18_40.pdf][1-15%]] | [[%ATTACHURL%/sf_mu_looseID.root][link]] |
+|Medium ID    | [[%ATTACHURL%/pt_mu_mediumID.pdf][0-8%]] |  [[%ATTACHURL%/eta_mu_mediumID.pdf][2-5%]] | [[%ATTACHURL%/HT_mu_mediumID.pdf][2-7%]] | [[%ATTACHURL%/njets_mu_mediumID.pdf][1-8%]] | [[%ATTACHURL%/npv_mu_mediumID.pdf][1-8%]] | - | [[%ATTACHURL%/sf_mu_mediumID_1.pdf][0-10%]]| [[%ATTACHURL%/sf_mu_mediumID_npv_1_9.pdf][0-8%]] | [[%ATTACHURL%/sf_mu_mediumID_npv_10_13.pdf][0-9%]] | [[%ATTACHURL%/sf_mu_mediumID_npv_14_17.pdf][0-12%]] | [[%ATTACHURL%/sf_mu_mediumID_npv_18_40.pdf][0-15%]] | [[%ATTACHURL%/sf_mu_mediumID.root][link]] |
+|IP2D    | [[%ATTACHURL%/pt_mu_tightIP2D.pdf][-]] |  [[%ATTACHURL%/eta_mu_tightIP2D.pdf][-]] | [[%ATTACHURL%/HT_mu_tightIP2D.pdf][-]] | [[%ATTACHURL%/njets_mu_tightIP2D.pdf][-]] | [[%ATTACHURL%/npv_mu_tightIP2D.pdf][-]] | - | [[%ATTACHURL%/sf_mu_tightIP2D_1.pdf][0-1%]]| [[%ATTACHURL%/sf_mu_tightIP2D_npv_1_9.pdf][-]] | [[%ATTACHURL%/sf_mu_tightIP2D_npv_10_13.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_tightIP2D_npv_14_17.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_tightIP2D_npv_18_40.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_tightIP2D.root][link]] |
+|IP3D    | [[%ATTACHURL%/pt_mu_tightIP3D.pdf][0-2%]] |  [[%ATTACHURL%/eta_mu_tightIP3D.pdf][0-2%]] | [[%ATTACHURL%/HT_mu_tightIP3D.pdf][-]] | [[%ATTACHURL%/njets_mu_tightIP3D.pdf][-]] | [[%ATTACHURL%/npv_mu_tightIP3D.pdf][0-2%]] | - | [[%ATTACHURL%/sf_mu_tightIP3D_1.pdf][0-2%]]| [[%ATTACHURL%/sf_mu_tightIP3D_npv_1_9.pdf][0-2%]] | [[%ATTACHURL%/sf_mu_tightIP3D_npv_10_13.pdf][0-2%]] | [[%ATTACHURL%/sf_mu_tightIP3D_npv_14_17.pdf][0-3%]] | [[%ATTACHURL%/sf_mu_tightIP3D_npv_18_40.pdf][1-3%]] | [[%ATTACHURL%/sf_mu_tightIP3D.root][link]] |
+|Miniiso 0.2    | [[%ATTACHURL%/pt_mu_mini02.pdf][-]] |  [[%ATTACHURL%/eta_mu_mini02.pdf][-]] | [[%ATTACHURL%/HT_mu_mini02.pdf][-]] | [[%ATTACHURL%/njets_mu_mini02.pdf][-]] | [[%ATTACHURL%/npv_mu_mini02.pdf][-]] | [[%ATTACHURL%/activ_mu_mini02.pdf][0-4%]]           |[[%ATTACHURL%/sf_mu_mini02_1.pdf][0-1%]]| [[%ATTACHURL%/sf_mu_mini02_npv_1_9.pdf][0-2%]] | [[%ATTACHURL%/sf_mu_mini02_npv_10_13.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_mini02_npv_14_17.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_mini02_npv_18_40.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_mini02.root][link]] |
+|Miniiso 0.4    | [[%ATTACHURL%/pt_mu_mini04.pdf][-]] |  [[%ATTACHURL%/eta_mu_mini04.pdf][-]] | [[%ATTACHURL%/HT_mu_mini04.pdf][-]] | [[%ATTACHURL%/njets_mu_mini04.pdf][-]] | [[%ATTACHURL%/npv_mu_mini04.pdf][-]] | [[%ATTACHURL%/activ_mu_mini04.pdf][0-2%]]           |[[%ATTACHURL%/sf_mu_mini04_1.pdf][-]]| [[%ATTACHURL%/sf_mu_mini04_npv_1_9.pdf][0-2%]] | [[%ATTACHURL%/sf_mu_mini04_npv_10_13.pdf][-]] | [[%ATTACHURL%/sf_mu_mini04_npv_14_17.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_mini04_npv_18_40.pdf][0-1%]] | [[%ATTACHURL%/sf_mu_mini04.root][link]] |
+|Multiiso   | [[%ATTACHURL%/pt_mu_multi.pdf][0-8%]] |  [[%ATTACHURL%/eta_mu_multi.pdf][-]] | [[%ATTACHURL%/HT_mu_multi.pdf][-]] | [[%ATTACHURL%/njets_mu_multi.pdf][-]] | [[%ATTACHURL%/npv_mu_multi.pdf][0-4%]] | [[%ATTACHURL%/activ_mu_multi.pdf][0-7%]]           |[[%ATTACHURL%/sf_mu_multi_1.pdf][0-8%]]| [[%ATTACHURL%/sf_mu_multi_npv_1_9.pdf][0-10%]] | [[%ATTACHURL%/sf_mu_multi_npv_10_13.pdf][0-7%]] | [[%ATTACHURL%/sf_mu_multi_npv_14_17.pdf][0-9%]] | [[%ATTACHURL%/sf_mu_multi_npv_18_40.pdf][0-12%]] | [[%ATTACHURL%/sf_mu_multi.root][link]] |
+
+
+
+---++ Electrons:
+
+|                                                              | pT      | eta     | HT   |Njets    | PU      | Activity | 2D [pT eta] | 2D [pt eta PU(0-9)] | 2D [pt eta PU(10-13)] | 2D [pt eta PU(14-17)] | 2D [pt eta PU(18-40)] | root |
+|CB tight                                                 | [[%ATTACHURL%/pt_el_tightCB.pdf][4-23%]]| [[%ATTACHURL%/eta_el_tightCB.pdf][4-22%]] | [[%ATTACHURL%/HT_el_tightCB.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_tightCB.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_tightCB.pdf][ 8-10%]] |  - | [[%ATTACHURL%/sf_el_tightCB.pdf][3-40%]]| [[%ATTACHURL%/sf_el_tightCB_npv_1_9.pdf][3-35%]] | [[%ATTACHURL%/sf_el_tightCB_npv_10_13.pdf][3-40%]] | [[%ATTACHURL%/sf_el_tightCB_npv_14_17.pdf][3-44%]] | [[%ATTACHURL%/sf_el_tightCB_npv_18_40.pdf][3-47%]] | [[%ATTACHURL%/sf_el_tightCB.root][link]] |
+|CB medium                                                 | [[%ATTACHURL%/pt_el_mediumCB.pdf][3-20%]]| [[%ATTACHURL%/eta_el_mediumCB.pdf][3-18%]] | [[%ATTACHURL%/HT_el_mediumCB.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_mediumCB.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_mediumCB.pdf][ 7-10%]] |  -  | [[%ATTACHURL%/sf_el_mediumCB.pdf][2-38%]]| [[%ATTACHURL%/sf_el_mediumCB_npv_1_9.pdf][2-33%]] | [[%ATTACHURL%/sf_el_mediumCB_npv_10_13.pdf][2-37%]] | [[%ATTACHURL%/sf_el_mediumCB_npv_14_17.pdf][2-40%]] | [[%ATTACHURL%/sf_el_mediumCB_npv_18_40.pdf][2-44%]] | [[%ATTACHURL%/sf_el_mediumCB.root][link]] |
+|CB loose                                                | [[%ATTACHURL%/pt_el_looseCB.pdf][3-18%]]| [[%ATTACHURL%/eta_el_looseCB.pdf][3-18%]] | [[%ATTACHURL%/HT_el_looseCB.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_looseCB.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_looseCB.pdf][ 7-10%]] | - | [[%ATTACHURL%/sf_el_looseCB.pdf][2-32%]]| [[%ATTACHURL%/sf_el_looseCB_npv_1_9.pdf][2-29%]] | [[%ATTACHURL%/sf_el_looseCB_npv_10_13.pdf][2-31%]] | [[%ATTACHURL%/sf_el_looseCB_npv_14_17.pdf][2-35%]] | [[%ATTACHURL%/sf_el_looseCB_npv_18_40.pdf][2-37%]] | [[%ATTACHURL%/sf_el_looseCB.root][link]] |
+|CB veto                                                | [[%ATTACHURL%/pt_el_vetoCB.pdf][2-15%]]| [[%ATTACHURL%/eta_el_vetoCB.pdf][2-16%]] | [[%ATTACHURL%/HT_el_vetoCB.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_vetoCB.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_vetoCB.pdf][ 6-9%]] | - | [[%ATTACHURL%/sf_el_vetoCB.pdf][1-27%]]| [[%ATTACHURL%/sf_el_vetoCB_npv_1_9.pdf][1-24%]] | [[%ATTACHURL%/sf_el_vetoCB_npv_10_13.pdf][1-26%]] | [[%ATTACHURL%/sf_el_vetoCB_npv_14_17.pdf][1-28%]] | [[%ATTACHURL%/sf_el_vetoCB_npv_18_40.pdf][1-31%]] | [[%ATTACHURL%/sf_el_vetoCB.root][link]] |
+|MVA VL                                                 | [[%ATTACHURL%/pt_el_vloose.pdf][0-11%]]| [[%ATTACHURL%/eta_el_vloose.pdf][2-11%]] | [[%ATTACHURL%/HT_el_vloose.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_vloose.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_vloose.pdf][ 3-6%]] | - | [[%ATTACHURL%/sf_el_vloose.pdf][0-20%]]| [[%ATTACHURL%/sf_el_vloose_npv_1_9.pdf][0-17%]] | [[%ATTACHURL%/sf_el_vloose_npv_10_13.pdf][0-19%]] | [[%ATTACHURL%/sf_el_vloose_npv_14_17.pdf][0-21%]] | [[%ATTACHURL%/sf_el_vloose_npv_18_40.pdf][0-24%]] | [[%ATTACHURL%/sf_el_vloose.root][link]] |
+|MVA  VLFO TrigIDEmu                                                   | [[%ATTACHURL%/pt_el_vlooseFO.pdf][0-10%]]| [[%ATTACHURL%/eta_el_vlooseFO.pdf][1-11%]] | [[%ATTACHURL%/HT_el_vlooseFO.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_vlooseFO.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_vlooseFO.pdf][ 3-6%]] | -  | [[%ATTACHURL%/sf_el_vlooseFO.pdf][0-18%]]| [[%ATTACHURL%/sf_el_vlooseFO_npv_1_9.pdf][0-16%]] | [[%ATTACHURL%/sf_el_vlooseFO_npv_10_13.pdf][0-18%]] | [[%ATTACHURL%/sf_el_vlooseFO_npv_14_17.pdf][0-20%]] | [[%ATTACHURL%/sf_el_vlooseFO_npv_18_40.pdf][0-22%]] | [[%ATTACHURL%/sf_el_vlooseFO.root][link]] |
+|MVA T                                                      | [[%ATTACHURL%/pt_el_tight2d3d.pdf][2-14%]]| [[%ATTACHURL%/eta_el_tight2d3d.pdf][2-16%]] | [[%ATTACHURL%/HT_el_tight2d3d.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_tight2d3d.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_tight2d3d.pdf][ 4-10%]] | - | [[%ATTACHURL%/sf_el_tight2d3d.pdf][1-24%]]| [[%ATTACHURL%/sf_el_tight2d3d_npv_1_9.pdf][1-20%]] | [[%ATTACHURL%/sf_el_tight2d3d_npv_10_13.pdf][1-23%]] | [[%ATTACHURL%/sf_el_tight2d3d_npv_14_17.pdf][2-25%]] | [[%ATTACHURL%/sf_el_tight2d3d_npv_18_40.pdf][2-29%]] | [[%ATTACHURL%/sf_el_tight2d3d.root][link]] |
+|MVA T TrigIDEmu                                            | [[%ATTACHURL%/pt_el_tight2d3dIDEmu.pdf][2-17%]]| [[%ATTACHURL%/eta_el_tight2d3dIDEmu.pdf][2-17%]] | [[%ATTACHURL%/HT_el_tight2d3dIDEmu.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_tight2d3dIDEmu.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_tight2d3dIDEmu.pdf][ 3-10%]] | - | [[%ATTACHURL%/sf_el_tight2d3dIDEmu.pdf][1-31%]]| [[%ATTACHURL%/sf_el_tight2d3dIDEmu_npv_1_9.pdf][1-26%]] | [[%ATTACHURL%/sf_el_tight2d3dIDEmu_npv_10_13.pdf][0-30%]] | [[%ATTACHURL%/sf_el_tight2d3dIDEmu_npv_14_17.pdf][1-33%]] | [[%ATTACHURL%/sf_el_tight2d3dIDEmu_npv_18_40.pdf][1-39%]] | [[%ATTACHURL%/sf_el_tight2d3dIDEmu.root][link]] |
+|VL/ConvVeto/InHits <= 1                                              | [[%ATTACHURL%/pt_el_inhit_less2.pdf][-]]| [[%ATTACHURL%/eta_el_inhit_less2.pdf][0-6%]] | [[%ATTACHURL%/HT_el_inhit_less2.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_inhit_less2.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_inhit_less2.pdf][ 3-10%]] | - | [[%ATTACHURL%/sf_el_inhit_less2.pdf][0-6%]]| [[%ATTACHURL%/sf_el_inhit_less2_npv_1_9.pdf][0-6%]] | [[%ATTACHURL%/sf_el_inhit_less2_npv_10_13.pdf][0-6%]] | [[%ATTACHURL%/sf_el_inhit_less2_npv_14_17.pdf][0-5%]] | [[%ATTACHURL%/sf_el_inhit_less2_npv_18_40.pdf][0-6%]] | [[%ATTACHURL%/sf_el_inhit_less2.root][link]] |
+|VL/ConvVeto/InHits=0/ChargeConsist                          | [[%ATTACHURL%/pt_el_inhit_eq0.pdf][2-6%]]| [[%ATTACHURL%/eta_el_inhit_eq0.pdf][4-14%]] | [[%ATTACHURL%/HT_el_inhit_eq0.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_inhit_eq0.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_inhit_eq0.pdf][ 5-8%]] | - | [[%ATTACHURL%/sf_el_inhit_eq0.pdf][5-10%]]| [[%ATTACHURL%/sf_el_inhit_eq0_npv_1_9.pdf][2-10%]] | [[%ATTACHURL%/sf_el_inhit_eq0_npv_10_13.pdf][2-10%]] | [[%ATTACHURL%/sf_el_inhit_eq0_npv_14_17.pdf][2-10%]] | [[%ATTACHURL%/sf_el_inhit_eq0_npv_18_40.pdf][1-12%]] | [[%ATTACHURL%/sf_el_inhit_eq0.root][link]] |
+|Miniiso 0.1                           | [[%ATTACHURL%/pt_el_mini01.pdf][0-4%]]| [[%ATTACHURL%/eta_el_mini01.pdf][0-3%]] | [[%ATTACHURL%/HT_el_mini01.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_mini01.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_mini01.pdf][ 0-5%]] | [[%ATTACHURL%/activ_el_mini01.pdf][ 0-2% ]]        | [[%ATTACHURL%/sf_el_mini01.pdf][0-12%]]| [[%ATTACHURL%/sf_el_mini01_npv_1_9.pdf][0-11%]] | [[%ATTACHURL%/sf_el_mini01_npv_10_13.pdf][0-10%]] | [[%ATTACHURL%/sf_el_mini01_npv_14_17.pdf][0-11%]] | [[%ATTACHURL%/sf_el_mini01_npv_18_40.pdf][0-17%]] | [[%ATTACHURL%/sf_el_mini01.root][link]] |
+|Miniiso 0.4                           | [[%ATTACHURL%/pt_el_mini04.pdf][-]]| [[%ATTACHURL%/eta_el_mini04.pdf][-]] | [[%ATTACHURL%/HT_el_mini04.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_mini04.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_mini04.pdf][ -]] | [[%ATTACHURL%/activ_el_mini04.pdf][ -  ]]        | [[%ATTACHURL%/sf_el_mini04.pdf][0-11%]]| [[%ATTACHURL%/sf_el_mini04_npv_1_9.pdf][0-11%]] | [[%ATTACHURL%/sf_el_mini04_npv_10_13.pdf][0-9%]] | [[%ATTACHURL%/sf_el_mini04_npv_14_17.pdf][0-11%]] | [[%ATTACHURL%/sf_el_mini04_npv_18_40.pdf][0-12%]] | [[%ATTACHURL%/sf_el_mini04.root][link]] |
+|Multiiso                           | [[%ATTACHURL%/pt_el_multi.pdf][0-10%]]| [[%ATTACHURL%/eta_el_multi.pdf][2-6%]] | [[%ATTACHURL%/HT_el_multi.pdf][  -  ]]    | [[%ATTACHURL%/njets_el_multi.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_multi.pdf][ 2-4%]] | [[%ATTACHURL%/activ_el_multi.pdf][0-9% ]]        | [[%ATTACHURL%/sf_el_multi.pdf][0-14%]]| [[%ATTACHURL%/sf_el_multi_npv_1_9.pdf][0-10%]] | [[%ATTACHURL%/sf_el_multi_npv_10_13.pdf][0-14%]] | [[%ATTACHURL%/sf_el_multi_npv_14_17.pdf][0-16%]] | [[%ATTACHURL%/sf_el_multi_npv_18_40.pdf][0-22%]] | [[%ATTACHURL%/sf_el_multi.root][link]] |
+|Multiiso  ISOEmu            | [[%ATTACHURL%/pt_el_multiISO.pdf][0-10%]]| [[%ATTACHURL%/eta_el_multiISO.pdf][2-6%]] | [[%ATTACHURL%/HT_el_multiISO.pdf][-]]    | [[%ATTACHURL%/njets_el_multiISO.pdf][ -    ]]      |  [[%ATTACHURL%/npv_el_multiISO.pdf][ 2-5%]] | [[%ATTACHURL%/activ_el_multiISO.pdf][0-9% ]]        | [[%ATTACHURL%/sf_el_multiISO.pdf][0-16%]]| [[%ATTACHURL%/sf_el_multiISO_npv_1_9.pdf][0-11%]] | [[%ATTACHURL%/sf_el_multiISO_npv_10_13.pdf][0-16%]] | [[%ATTACHURL%/sf_el_multiISO_npv_14_17.pdf][0-18%]] | [[%ATTACHURL%/sf_el_multiISO_npv_18_40.pdf][0-22%]] | [[%ATTACHURL%/sf_el_multiISO.root][link]] |
+
+
+---+++ Comments
+
+   * For muon miniiso 0.2 up to 4% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 1
+   * For muon miniiso 0.4 up to 2% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 1
+   * For muon multiiso up to 7% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 0.15
+   * For electron miniiso 0.1 up to 2% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 0.15, big SF for detector gap region
+   * For electron miniiso 0.4 big SF for detector gap region
+   * For electron multiiso up to 9% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 0.05
+   * For electron multiiso + ISO trigger Emu up to 9% discrepancy between Fullsim and Fastsim for activity around lepton bigger than 0.05
+  
+---+ Recommendations
+ 
+   * The main dependencies is on pT, eta and PU. 
+   * The recommendation is to use 2D SF if the PU dependence varies within 5% window and additional 2.5% uncertainty to statistical uncertainty should be assigned. 
+   * In case PU change is bigger than 5% the recommendation is to use 3D SF and no additional uncertainty should be assigned. 
+   * User should provide three numbers - lepton pT, eta and PU in the event and from root file the one gets Fullsim/Fastsim SF and uncertainty(see below), which should be applied for each lepton. 
+   * Each root file contains 2D[pt eta] and 3D[pt eta PU] SF, approximately statistical uncertainty for 3D SF(2%) is twice bigger than for 2D SF(1%). 
+   * User can choose by himself which SF to use
+   * Additional uncertainty should be assigned for Muon Loose ID(6%) and Muon Medium ID(6%) due to addtional dependence on HT and Njets .
+   
+
+---++ How to retrieve SF and uncertainty
+
+Example with file sf_el_mini01.root:
+
+<pre>
+root -l sf_el_mini01.root
+
+// 3D SF
+root [0] TH3D *h = (TH3D*)_file0.Get("histo3D");
+root [1] h->GetBinContent(h->GetXaxis()->FindBin(pt_lepton), h->GetYaxis()->FindBin(fabs(eta_lepton)), h->GetZaxis()->FindBin(PU))
+root [2] h->GetBinError(h->GetXaxis()->FindBin(pt_lepton), h->GetYaxis()->FindBin(fabs(eta_lepton)), h->GetZaxis()->FindBin(PU))
+
+// 2D SF
+root [3] TH2D *h = (TH2D*)_file0.Get("histo2D");
+root [4] h->GetBinContent(h->GetXaxis()->FindBin(pt_lepton), h->GetYaxis()->FindBin(fabs(eta_lepton)))
+root [5] h->GetBinError(h->GetXaxis()->FindBin(pt_lepton), h->GetYaxis()->FindBin(fabs(eta_lepton)))
+
+</pre>
+
+---+ Documentation
+
+   * [[https://indico.cern.ch/event/399117/contribution/1/attachments/799526/1095845/khvastunov_5Jun_2015.pdf][5 June 2015 Leptonic SUSY meeting]]
+   * [[https://twiki.cern.ch/twiki/bin/viewauth/CMS/SUSLeptonSF][SUSY Lepton SF twiki]]
+   * [[https://indico.cern.ch/event/455555/session/0/contribution/5/attachments/1176019/1700214/khvastunov_SUSY_23Oct_2015.pdf][23 Oct 2015 Leptonic SUSY meeting]]
